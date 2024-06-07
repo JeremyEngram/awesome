@@ -2,7 +2,7 @@
 # shellcheck disable=SC2154
 
 version="0.5.3"
-awesome_dir="$HOME/.local/share/awesome"
+omnihub_dir="$HOME/.local/share/omnihub"
 bin_dir="$HOME/.local/share/bin"
 
 myrealpath() {
@@ -19,15 +19,15 @@ myrealpath() {
     echo "$REALPATH"
 }
 
-# $0 may have ./ in ./awesome
+# $0 may have ./ in ./omnihub
 # then use pwd
 
-if [[ -z $(which awesome) || $0 = "./awesome" ]]; then
-    # running awesome from local using ./awesome and awesome is not installed 
+if [[ -z $(which omnihub) || $0 = "./omnihub" ]]; then
+    # running omnihub from local using ./omnihub and omnihub is not installed 
     script_path=$(myrealpath "$0")
 else
-    # awesome is installed
-    script_path=$(myrealpath "$(which awesome)")
+    # omnihub is installed
+    script_path=$(myrealpath "$(which omnihub)")
 fi
 
 script_dir="${script_path%/*}"
@@ -47,8 +47,8 @@ fn_confirmRemove() {
 # Outputs the main script name. if $2 is provided use it as script_name otherwise use $1 as script_name
 fn_search_main() {
     repo=$1
-    if [[ -d "$awesome_dir/$repo" ]]; then
-        cd "$awesome_dir/$repo" || return
+    if [[ -d "$omnihub_dir/$repo" ]]; then
+        cd "$omnihub_dir/$repo" || return
         if [[ -n $2 ]]; then
             script_name=$2
         else
@@ -64,7 +64,7 @@ fn_search_main() {
     else
         printf "${RED}%s${RESET}\n" "The repo and script names are different. For example, tldr-sh-client/tldr." >&2
         printf "${RED}%s${RESET}\n" "Use, for example:" >&2
-        printf "${RED}%s${RESET}\n" "awesome link tldr-sh-client tldr" >&2
+        printf "${RED}%s${RESET}\n" "omnihub link tldr-sh-client tldr" >&2
         exit 1
     fi
 }
@@ -73,16 +73,16 @@ fn_search_main() {
 fn_remove_dir() {
     repo=$1
     src_path=$2
-    # exit if the src_path is $HOME/awesome
-    if [[ $src_path == "$awesome_dir" || $src_path == "$bin_dir" ]]; then
-        printf "${RED}%s${RESET}\n" "We don't remove $awesome_dir nor $bin_dir directory."
+    # exit if the src_path is $HOME/omnihub
+    if [[ $src_path == "$omnihub_dir" || $src_path == "$bin_dir" ]]; then
+        printf "${RED}%s${RESET}\n" "We don't remove $omnihub_dir nor $bin_dir directory."
         printf "${RED}%s${RESET}\n" "You already removed the repo."
         return
     fi
 
     # there will be 6 or 7 slashes
-    # /Users/shinichiokada/.local/share/awesome/Bash-Snippets/ytview
-    # /Users/shinichiokada/.local/share/awesome/gitig
+    # /Users/shinichiokada/.local/share/omnihub/Bash-Snippets/ytview
+    # /Users/shinichiokada/.local/share/omnihub/gitig
     slash_num=$(slashes "$src_path")
     if [ "$slash_num" = 6 ]; then
         path_to_delete="$src_path"
@@ -107,9 +107,9 @@ fn_remove_symlink() {
         exit 1
     fi
     repo=$1
-    # if the repo is awesome then exit with warning.
-    if [[ $repo = 'awesome' ]]; then
-        printf "${RED}%s${RESET}\n" "==> Please don't remove the awesome link."
+    # if the repo is omnihub then exit with warning.
+    if [[ $repo = 'omnihub' ]]; then
+        printf "${RED}%s${RESET}\n" "==> Please don't remove the omnihub link."
     fi
     # src_path=$2
     if no_symlink "$repo" "$bin_dir"; then
@@ -137,21 +137,21 @@ fn_add_symlink() {
     else
         script_name="$repo_base"
     fi
-    # check if repo_name exists in awesome dir
+    # check if repo_name exists in omnihub dir
     printf "${CYAN}%s${RESET}\n" "Searching ..."
     # echo "repo-base $repo_base"
     # echo "script-name: $script_name"
-    if [[ $(ls "$awesome_dir/$repo_base") =~ $script_name ]]; then
+    if [[ $(ls "$omnihub_dir/$repo_base") =~ $script_name ]]; then
         # exit
         file_name=$(fn_search_main "$repo_base" "$script_name") || exit 1
         echo "$file_name"
         # if not exit with warning
-        # show awesome dir
+        # show omnihub dir
         # link repo_name/script_name
-        create_symlink "${awesome_dir}" "${repo_base}" "${script_name}" "${bin_dir}" || exit
+        create_symlink "${omnihub_dir}" "${repo_base}" "${script_name}" "${bin_dir}" || exit
         printf "${GREEN}%s${RESET}\n" "Symlink added."
     else
-        printf "${RED}%s${RESET}\n" "No $script_name in $awesome_dir"
+        printf "${RED}%s${RESET}\n" "No $script_name in $omnihub_dir"
         exit 1
 
     fi
@@ -175,7 +175,7 @@ fn_install() {
         # e.g. repo_script shinokada/gitig
         # returns repo_link
         repo_script "$1" "$2"
-        cd "$awesome_dir" || exit
+        cd "$omnihub_dir" || exit
         # echo "script dir: $script_dir"
         # echo "repo name: $repo_name"
         # echo "repo link: $repo_link"
@@ -189,14 +189,14 @@ fn_install() {
             fi
             printf "${GREEN}%s${RESET}\n" "Cloning done."
         fi
-        # echo "${awesome_dir}, ${repo_name}, ${script_name}, ${bin_dir}"
-        create_symlink "${awesome_dir}" "${repo_name}" "${script_name}" "${bin_dir}" || exit
+        # echo "${omnihub_dir}, ${repo_name}, ${script_name}, ${bin_dir}"
+        create_symlink "${omnihub_dir}" "${repo_name}" "${script_name}" "${bin_dir}" || exit
         repo=$repo_name
     elif [[ $slash_num = 1 ]]; then
         # $1 alexanderepstein/Bash-Snippets
         # $2 cheat/cheat
         # echo "You have 1 /."
-        cd "$awesome_dir" || exit
+        cd "$omnihub_dir" || exit
         # echo "1: $1" # alexanderepstein/Bash-Snippets
         user_repo=$1
         # git_user=$(first "$user_repo")
@@ -219,7 +219,7 @@ fn_install() {
         repo_script "$1" "$script_name"
         # echo "$repo_name, $script_repo, $script_name"
 
-        if [[ ! -d "${awesome_dir}/${repo_name}" ]]; then
+        if [[ ! -d "${omnihub_dir}/${repo_name}" ]]; then
             # clone
             echo "cloning"
             if [[ $3 ]];then
@@ -231,7 +231,7 @@ fn_install() {
             printf "${GREEN}%s${RESET}\n" "Cloning done."
         fi
         # create a symlink
-        create_symlink "${awesome_dir}" "${repo_name}/${script_repo}" "${script_name}" "${bin_dir}" || exit
+        create_symlink "${omnihub_dir}" "${repo_name}/${script_repo}" "${script_name}" "${bin_dir}" || exit
         repo=$script_name
     else
         printf "${RED}%s${RESET}\n" "You can't install sub/sub/script."
@@ -242,12 +242,12 @@ fn_install() {
 
 # fn_uninstall removes a symlink and repo
 fn_rm() {
-    cd "$awesome_dir" || exit
+    cd "$omnihub_dir" || exit
     repo=$1
-    # exit with warning if $repo is awesome
-    # Please read the README at https://github.com/shinokada/awesome
-    if [[ $repo = "awesome" ]]; then
-        printf "${RED}%s${RESET}\n" "If you want to uninstall awesome, Please read the README at https://github.com/shinokada/awesome"
+    # exit with warning if $repo is omnihub
+    # Please read the README at https://github.com/shinokada/omnihub
+    if [[ $repo = "omnihub" ]]; then
+        printf "${RED}%s${RESET}\n" "If you want to uninstall omnihub, Please read the README at https://github.com/shinokada/omnihub"
         open_url
         exit
     fi
@@ -256,9 +256,9 @@ fn_rm() {
     # exit
     # find the realpath (source)
     path=$(myrealpath "$bin_dir/$repo")
-    # $path /Users/shinichiokada/.local/share/awesome/Bash-Snippets/weather/weather
+    # $path /Users/shinichiokada/.local/share/omnihub/Bash-Snippets/weather/weather
     src_path=$(src_path "$path")
-    # src path: /Users/shinichiokada/.local/share/awesome/Bash-Snippets/weather
+    # src path: /Users/shinichiokada/.local/share/omnihub/Bash-Snippets/weather
     # echo "repo: $repo"
     # check number of symlink with src_path
     # second "$(first "$src_path")"
@@ -322,7 +322,7 @@ fn_add_alias() {
     if alias_check "$alias_name" >&/dev/null; then
         printf "${CYAN}%s${RESET}\n" "Creating an alias $alias_name to $repo_name/$script_name"
         # all good create an alias
-        create_alias "${awesome_dir}" "${repo_name}" "${script_name}" "${bin_dir}" "${alias_name}" || exit
+        create_alias "${omnihub_dir}" "${repo_name}" "${script_name}" "${bin_dir}" "${alias_name}" || exit
         printf "${GREEN}%s${RESET}\n" "Alias $alias_name created."
     else
         printf "${RED}%s${RESET}\n" "You have the same alias as ${alias_name}."
@@ -337,7 +337,7 @@ fn_push() {
         printf "${RED}%s${RESET}\n" "Please add commit message."
         exit 1
     fi
-    # check if it is awesome lib
+    # check if it is omnihub lib
     # find the dir name which should be the script name
     dir_path=$(pwd)
     dir_name=$(second "$dir_path")
@@ -358,17 +358,17 @@ fn_push() {
 
 fn_help() {
     cat <<EOF
-Description: Awesome install a package from a GitHub repo on your macOS/Linux.
+Description: Omnihub install a package from a GitHub repo on your macOS/Linux.
 
-Usage: awesome (command | -h | v )
+Usage: omnihub (command | -h | v )
     install  installs a package from a GitHub repo and create a symlink in $bin_dir
     rm       uninstalls a package and remove a symlink
-    ls       lists awesome packages
+    ls       lists omnihub packages
     link     adds a symlink
     unlink   remove a package symlink 
     links    print all links
     update   checks an update and install a new package
-    push     Git add, commit, push, awesome update
+    push     Git add, commit, push, omnihub update
     alias    creates an alias 
 
 Options:
@@ -378,47 +378,47 @@ Options:
 
 Examples:
     Install a package
-    awesome install shinokada/gitstart
-    awesome install shinokada/gitstart.git
-    awesome install raylee/tldr-sh-client tldr
-    awesome install https://github.com/raylee/tldr-sh-client tldr
+    omnihub install shinokada/gitstart
+    omnihub install shinokada/gitstart.git
+    omnihub install raylee/tldr-sh-client tldr
+    omnihub install https://github.com/raylee/tldr-sh-client tldr
     
     Uninstall a package
-    awesome rm gitstart
+    omnihub rm gitstart
 
     Update a package
-    awesome update gitstart
+    omnihub update gitstart
 
     Show installed packages
-    awesome ls
+    omnihub ls
 
     Create an alias to a script
-    awesome alias ne script-example node-example.js
+    omnihub alias ne script-example node-example.js
 
     Remove a symlink
-    awesome unlink gitstart
+    omnihub unlink gitstart
 
     Create a symlink
-    awesome link gitstart
-    awesome link tmux-xpanes/bin xpanes
+    omnihub link gitstart
+    omnihub link tmux-xpanes/bin xpanes
 
-    Git add, commit, push, awesome update
-    awesome push "message"
+    Git add, commit, push, omnihub update
+    omnihub push "message"
 
     Show this help
-    awesome -h
+    omnihub -h
 
     Show the version
-    awesome -v
+    omnihub -v
 
-    Open Awesome GitHub repo page 
-    awesome url
+    Open Omnihub GitHub repo page 
+    omnihub url
 EOF
     exit
 }
 
 fn_url() {
-    python -m webbrowser https://github.com/shinokada/awesome
+    python -m webbrowser https://github.com/shinokada/omnihub
 }
 
 fn_show_symlinks() {
@@ -448,7 +448,7 @@ fn_main() {
     fi
 }
 
-checkOrmkdir "$awesome_dir"
+checkOrmkdir "$omnihub_dir"
 checkOrmkdir "$bin_dir"
 check_cmd git
 fn_main "$@"
