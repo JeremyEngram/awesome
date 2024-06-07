@@ -10,7 +10,7 @@
 <a href="https://opensource.org/licenses/MIT" rel="nofollow" target="_blank"><img src="https://img.shields.io/github/license/shinokada/omnihub" alt="License" height="25"></a>
 </p>
 
-<h1  align="center">A Simple Shell Script Package Manager - omnihub</h1>
+<h1  align="center">OmniHub - A Simple Shell Script Package Manager For Omniscient</h1>
 <p align="center">
 <img width="400" src="https://raw.githubusercontent.com/shinokada/omnihub/main/images/omnihubsky-o.gif" />
 </p>
