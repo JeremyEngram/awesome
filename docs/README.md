@@ -1,36 +1,29 @@
 <p align="center">
-<a href='https://ko-fi.com/Z8Z2CHALG' target='_blank'><img height='42' style='border:0px;height:42px;' src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' alt='Buy Me a Coffee at ko-fi.com' /></a>
+<a href='https://ko-fi.com/Z8Z2CHALG' target='_blank'><img height='42' style='border:0px;height:42px;' src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' alt='Buy Me a Scotch & Coffee' /></a>
 </p>
 
-<p align="center">
-<img width="400" src="https://raw.githubusercontent.com/shinokada/awesome/main/images/mkdirawesome.png" />
-</p>
-
-<p align="center">
-<a href="https://awesome.codewithshin.com/">https://awesome.codewithshin.com/</a>
-</p>
 
 <p align="center">
 <a href="https://github.com/sponsors/shinokada" target="_blank"><img src="https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86" height="25"></a>
 <a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps" target="_blank"><img src="https://img.shields.io/badge/PWA-enabled-brightgreen" alt="PWA Shield" height="25"></a>
 <a href="https://twitter.com/shinokada" rel="nofollow" target="_blank"><img src="https://img.shields.io/badge/created%20by-@shinokada-4BBAAB.svg" alt="Created by Shin Okada" height="25"></a>
-<a href="https://opensource.org/licenses/MIT" rel="nofollow" target="_blank"><img src="https://img.shields.io/github/license/shinokada/awesome" alt="License" height="25"></a>
+<a href="https://opensource.org/licenses/MIT" rel="nofollow" target="_blank"><img src="https://img.shields.io/github/license/shinokada/omnihub" alt="License" height="25"></a>
 </p>
 
-<h1  align="center">A Simple Shell Script Package Manager - Awesome</h1>
+<h1  align="center">A Simple Shell Script Package Manager - omnihub</h1>
 <p align="center">
-<img width="400" src="https://raw.githubusercontent.com/shinokada/awesome/main/images/awesomesky-o.gif" />
+<img width="400" src="https://raw.githubusercontent.com/shinokada/omnihub/main/images/omnihubsky-o.gif" />
 </p>
 
-[Read more about Aweseome Package Manager](https://medium.com/mkdir-awesome/a-new-simple-package-manager-for-script-languages-a1228fd0972a)
+[Read more about Aweseome Package Manager](https://medium.com/mkdir-omnihub/a-new-simple-package-manager-for-script-languages-a1228fd0972a)
 
 ## Overview
 
-The `awesome` is a simple shell script package manager. Awesome installs a shell script package from a GitHub repo on your macOS/Linux.
+The `omnihub` is a simple shell script package manager. omnihub installs a shell script package from a GitHub repo on your macOS/Linux.
 
- It creates the `~/.local/share/awesome` directory and the `~/.local/share/bin` directory if they don't exist. When you install a package, it will clone it in the `~/.local/share/awesome` directory. It creates a symlink in the `~/.local/share/bin` directory.
+ It creates the `~/.local/share/omnihub` directory and the `~/.local/share/bin` directory if they don't exist. When you install a package, it will clone it in the `~/.local/share/omnihub` directory. It creates a symlink in the `~/.local/share/bin` directory.
 
- Use `awesome push <message>` to run Git commands and awesome update.
+ Use `omnihub push <message>` to run Git commands and omnihub update.
 
 ## Why?
 
@@ -43,16 +36,16 @@ UNIX-lie (Tested on Ubuntu and MacOS.)
 
 ## Installation
 
-Installing awesome:
+Installing omnihub:
 
 ```sh
-curl -s https://raw.githubusercontent.com/shinokada/awesome/main/install | bash -s install
+curl -s https://raw.githubusercontent.com/shinokada/omnihub/main/install | bash -s install
 ```
 
 or
 
 ```sh
-wget -qO - https://raw.githubusercontent.com/shinokada/awesome/main/install | bash -s install
+wget -qO - https://raw.githubusercontent.com/shinokada/omnihub/main/install | bash -s install
 ```
 
 Add the following to your terminal config file, such as .zshrc or .bashrc.
@@ -70,24 +63,24 @@ Then source the config file or open a new terminal tab.
 
 ## Uninstallation
 
-Uninstalling awesome:
+Uninstalling omnihub:
 
 ```sh
-curl -s https://raw.githubusercontent.com/shinokada/awesome/main/install > tmp1 && bash tmp1 uninstall && rm tmp1
+curl -s https://raw.githubusercontent.com/shinokada/omnihub/main/install > tmp1 && bash tmp1 uninstall && rm tmp1
 ```
 
 or
 
 ```sh
-wget -qO - https://raw.githubusercontent.com/shinokada/awesome/main/install > tmp1 && bash tmp1 uninstall && rm tmp1
+wget -qO - https://raw.githubusercontent.com/shinokada/omnihub/main/install > tmp1 && bash tmp1 uninstall && rm tmp1
 ```
 
-## Update Awesome
+## Update omnihub
 
-Update awesome:
+Update omnihub:
 
 ```sh
-awesome update awesome
+omnihub update omnihub
 ```
 
 ## Usage
@@ -95,14 +88,14 @@ awesome update awesome
 ```sh
 install  installs a package from a GitHub repo and create a symlink in ~/bin
 rm       uninstalls a package and remove a symlink
-ls       lists awesome packages
+ls       lists omnihub packages
 link     adds a symlink
 unlink   remove a package symlink
 links    prints all links
 update   checks an update and install a new package
 push     Git add, commit, push, and update the script you are working
 alias    creates an alias
-url      opens Awesome repo on a browser
+url      opens omnihub repo on a browser
 ```
 
 ## Options
@@ -116,47 +109,47 @@ You can use different ways installing scripts.
 
 ```sh
 # Installing a repo using user/repo
-awesome install shinokada/gitstart
+omnihub install shinokada/gitstart
 
 # Installing a repo using user/repo.git
-awesome install shinokada/gitstart.git
+omnihub install shinokada/gitstart.git
 
 # Installing a repo whose main script is different from the repo name
-awesome install raylee/tldr-sh-client tldr
+omnihub install raylee/tldr-sh-client tldr
 
 # Same as above but using https
-awesome install https://github.com/shinokada/cleanit
+omnihub install https://github.com/shinokada/cleanit
 
-awesome install https://github.com/raylee/tldr-sh-client tldr
+omnihub install https://github.com/raylee/tldr-sh-client tldr
 
 # Installing a repo using install option instead of -i
-awesome install https://github.com/shinokada/gitstart.git
+omnihub install https://github.com/shinokada/gitstart.git
 ```
 
 To install scripts from [Bash snippets](https://github.com/alexanderepstein/Bash-Snippets):
 
 ```sh
-awesome install alexanderepstein/Bash-Snippets cheat/cheat
+omnihub install alexanderepstein/Bash-Snippets cheat/cheat
 # add more script
-awesome install alexanderepstein/Bash-Snippets movies/movies
+omnihub install alexanderepstein/Bash-Snippets movies/movies
 ```
 
 ## Remove a symlink and repo
 
 ```sh
-awesome rm cleanit
+omnihub rm cleanit
 ```
 
 ## Show installed packages
 
 ```sh
-awesome ls
+omnihub ls
 ```
 
 ## Update a repo
 
 ```sh
-awesome update cleanit
+omnihub update cleanit
 ```
 
 ## Git add, commit, push, and update
@@ -164,30 +157,30 @@ awesome update cleanit
 When you are working on a script, you need to run a bunch of Git commands and update the local package. Use `push`:
 
 ```sh
-awesome push "your commit message"
+omnihub push "your commit message"
 ```
 
-This will run Git add, commit, push, and awesome update commands.
+This will run Git add, commit, push, and omnihub update commands.
 
 
-## Open a Awesome URL page
+## Open a omnihub URL page
 
 ```sh
-awesome url
+omnihub url
 ```
 
 ## Print help
 
 ```sh
-awesome --help
-awesome -h
+omnihub --help
+omnihub -h
 ```
 
 ## Print version
 
 ```sh
-awesome --version
-awesome -v
+omnihub --version
+omnihub -v
 ```
 
 ## What should I do when a repo has multiple scripts
@@ -199,7 +192,7 @@ Let's add aliases using [script-examples](https://github.com/shinokada/script-ex
 Install it using php-example.php as the main script.
 
 ```sh
-awesome install shinokada/script-examples php-example.php
+omnihub install shinokada/script-examples php-example.php
 ```
 
 Run it:
@@ -214,7 +207,7 @@ Let's add an alias to node-example.js using `alias ne`, where `ne` is an alias n
 
 ```sh
 # Create an alias to a different script
-awesome alias ne script-examples node-example.js
+omnihub alias ne script-examples node-example.js
 ```
 
 Run it:
@@ -230,28 +223,28 @@ You can try it for `perl-example.pl`, `python-example.py`, `ruby-example.rb`.
 
 | Name                                                              | Installation                            | Description                                                                                 |
 | ----------------------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------- |
-| [tldr](https://github.com/raylee/tldr-sh-client)                  | awesome -i raylee/tldr-sh-client tldr   | a collection of community-maintained help pages for command-line tools                      |
-| [has](https://github.com/kdabir/has)                              | awesome -i kdabir/has                   | Helps you to check the presence of various command line tools and their versions on a path. |
-| [ddgr](https://github.com/jarun/ddgr)                             | awesome -i jarun/ddgr                   | DuckDuckGo from the terminal.                                                               |
-| [desk](https://github.com/jamesob/desk)                           | awesome -i jamesob/desk                 | Lightweight workspace manager for the shell.                                                |
-| [gitstart](https://github.com/shinokada/gitstart)                 | awesome -i shinokada/gitstart           | GitHub repository automation.                                                               |
-| [gitig](https://github.com/shinokada/gitig)                       | awesome -i shinokada/gitig              | Fix a gitignore problem.                                                                    |
-| [googler](https://github.com/jarun/googler)                       | awesome -i jarun/googler                | Google Search, Google Site Search, Google News from the terminal.                           |
-| [hhighlighter](https://github.com/paoloantinori/hhighlighter)     | awesome -i paoloantinori/hhighlighter h | Colorize words in a command output.                                                         |
-| [backpack_install](https://github.com/shinokada/backpack_install) | awesome -i shinokada/backpack_install   | Backpack for Laravel installer.                                                             |
-| [hr](https://github.com/paoloantinori/hhighlighter)               | awesome -i LuRsT/hr                     | A horizontal ruler for your terminal.                                                       |
-| [manop](https://github.com/shinokada/manop)                       | awesome -i shinokada/manop              | Man page description and option viewer.                                                     |
-| [shml](https://github.com/odb/shml)                               | awesome -i odb/shml shml.sh             | A shell framework for faster and easier script development.                                 |
-| [slugify](https://github.com/benlinton/slugify)                   | awesome -i benlinton/slugify            | A bash command that converts filenames and directories to a web friendly format.            |
-| [spark](https://github.com/holman/spark)                          | awesome -i holman/spark                 | ▁▂▃▅▂▇ in your shell.                                                                       |
-| [spot](https://github.com/rauchg/spot)                            | awesome -i rauchg/spot                  | Tiny file search utility.                                                                   |
-| [v](https://github.com/rupa/v)                                    | awesome -i rupa/v                       | z for vim.                                                                                  |
-| [ansiweather](https://github.com/fcambus/ansiweather)             | awesome -i fcambus/ansiweather          | Display the current weather conditions.                                                     |
+| [tldr](https://github.com/raylee/tldr-sh-client)                  | omnihub -i raylee/tldr-sh-client tldr   | a collection of community-maintained help pages for command-line tools                      |
+| [has](https://github.com/kdabir/has)                              | omnihub -i kdabir/has                   | Helps you to check the presence of various command line tools and their versions on a path. |
+| [ddgr](https://github.com/jarun/ddgr)                             | omnihub -i jarun/ddgr                   | DuckDuckGo from the terminal.                                                               |
+| [desk](https://github.com/jamesob/desk)                           | omnihub -i jamesob/desk                 | Lightweight workspace manager for the shell.                                                |
+| [gitstart](https://github.com/shinokada/gitstart)                 | omnihub -i shinokada/gitstart           | GitHub repository automation.                                                               |
+| [gitig](https://github.com/shinokada/gitig)                       | omnihub -i shinokada/gitig              | Fix a gitignore problem.                                                                    |
+| [googler](https://github.com/jarun/googler)                       | omnihub -i jarun/googler                | Google Search, Google Site Search, Google News from the terminal.                           |
+| [hhighlighter](https://github.com/paoloantinori/hhighlighter)     | omnihub -i paoloantinori/hhighlighter h | Colorize words in a command output.                                                         |
+| [backpack_install](https://github.com/shinokada/backpack_install) | omnihub -i shinokada/backpack_install   | Backpack for Laravel installer.                                                             |
+| [hr](https://github.com/paoloantinori/hhighlighter)               | omnihub -i LuRsT/hr                     | A horizontal ruler for your terminal.                                                       |
+| [manop](https://github.com/shinokada/manop)                       | omnihub -i shinokada/manop              | Man page description and option viewer.                                                     |
+| [shml](https://github.com/odb/shml)                               | omnihub -i odb/shml shml.sh             | A shell framework for faster and easier script development.                                 |
+| [slugify](https://github.com/benlinton/slugify)                   | omnihub -i benlinton/slugify            | A bash command that converts filenames and directories to a web friendly format.            |
+| [spark](https://github.com/holman/spark)                          | omnihub -i holman/spark                 | ▁▂▃▅▂▇ in your shell.                                                                       |
+| [spot](https://github.com/rauchg/spot)                            | omnihub -i rauchg/spot                  | Tiny file search utility.                                                                   |
+| [v](https://github.com/rupa/v)                                    | omnihub -i rupa/v                       | z for vim.                                                                                  |
+| [ansiweather](https://github.com/fcambus/ansiweather)             | omnihub -i fcambus/ansiweather          | Display the current weather conditions.                                                     |
 
 
 You can use more than 20 scripts from [Bash Snippets](https://github.com/alexanderepstein/Bash-Snippets).
 
-## How to create a script for Awesome
+## How to create a script for omnihub
 
 - Add a shebang for example `#!/usr/bin/env bash` at the beginning.
 - Recommend use a file name without `.sh` file extension for the main script
