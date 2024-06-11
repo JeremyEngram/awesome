@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-awesome_dir="$HOME/.local/share/awesome"
+omnihub_dir="$HOME/.local/share/omnihub"
 bin_dir="$HOME/.local/share/bin"
 # version="0.1.1"
 
@@ -16,7 +16,7 @@ fn_confirm() {
     echo $ans
 }
 
-# check if a dir exist. if not create it and add $HOME/awesome path to config file
+# check if a dir exist. if not create it and add $HOME/omnihub path to config file
 fn_checkDir() {
     if [[ -z $1 ]]; then
         echo "Specify the directory." >&2
@@ -40,7 +40,7 @@ fn_create_symlink() {
     # find the name of repo
     repo_name=$1
     # add a symlink
-    ln -sf "${awesome_dir}/${repo_name}/${repo_name}" "${bin_dir}/${repo_name}"
+    ln -sf "${omnihub_dir}/${repo_name}/${repo_name}" "${bin_dir}/${repo_name}"
 }
 
 fn_find_symlinks() {
@@ -50,12 +50,12 @@ fn_find_symlinks() {
 
 # Run git clone and create a symlink
 fn_install() {
-    fn_checkDir "$awesome_dir"
+    fn_checkDir "$omnihub_dir"
     fn_checkDir "$bin_dir"
     fn_check_cmd git
-    cd "$awesome_dir" || exit
-    url="https://github.com/shinokada/awesome.git"
-    repo="awesome"
+    cd "$omnihub_dir" || exit
+    url="https://github.com/jeremyengram/omnihub.git"
+    repo="omnihub"
     { git clone "${url}" && fn_create_symlink "${repo}"; } || exit
     echo "${repo} installation completed."
     echo "Add the following to your your terminal config file, such as .zshrc or .bashrc."
@@ -63,7 +63,7 @@ fn_install() {
     echo "Try ${repo} -h or which ${repo}."
 }
 
-# Removes the awesome symlinks and dir
+# Removes the omnihub symlinks and dir
 fn_uninstall() {
     echo "Finding symlinks ..."
 
@@ -77,10 +77,10 @@ fn_uninstall() {
         done
     fi
 
-    if [[ $(fn_confirm awesome-directory) = "Y" ]]; then
-        echo "Uninstalling awesome directory ..."
-        rm -rf "$awesome_dir"
-        echo "Uninstalled awesome directory."
+    if [[ $(fn_confirm omnihub-directory) = "Y" ]]; then
+        echo "Uninstalling omnihub directory ..."
+        rm -rf "$omnihub_dir"
+        echo "Uninstalled omnihub directory."
         exit
     fi
 }
